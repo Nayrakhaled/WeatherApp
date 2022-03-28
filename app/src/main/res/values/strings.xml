@@ -28,4 +28,6 @@
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
     <string name="pressure">Pressure</string>
+    <string name="initial_setting">Initial Setting</string>
+    <string name="ok">OK</string>
 </resources>

@@ -2,13 +2,18 @@ package com.example.weatherapp
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.weatherapp.databinding.ActivitySplushBinding
@@ -23,6 +28,8 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var mFusedLocation: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
 
+    lateinit var radioButton: RadioButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplushBinding.inflate(layoutInflater)
@@ -31,7 +38,8 @@ class SplashActivity : AppCompatActivity() {
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this)
 
         binding.btn.setOnClickListener {
-             getLastLocation()
+             //getLastLocation()
+            showDialog()
         }
     }
 
@@ -143,6 +151,27 @@ class SplashActivity : AppCompatActivity() {
             }
         }
     }
+
+
+    private fun showDialog(){
+        val builder = AlertDialog.Builder(this)
+            .create()
+        val view = layoutInflater.inflate(R.layout.dialog_screen,null)
+        val  okBtn = view.findViewById<Button>(R.id.ok_btn)
+        val  radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup_loc)
+        builder.setView(view)
+        okBtn.setOnClickListener {
+            val selectedOption: Int = radioGroup!!.checkedRadioButtonId
+            radioButton = view.findViewById(selectedOption)
+            Log.i("TAG", "showDialog: ${radioButton.text}")
+            if(radioButton.text == "Map") startActivity(Intent(applicationContext, MapActivity::class.java))
+                else Log.i("TAG", "showDialog: GPS")
+            builder.dismiss()
+        }
+        builder.setCanceledOnTouchOutside(false)
+        builder.show()
+    }
+
 }
 
 

@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.favourite
+package com.example.weatherapp.favourite
 
 import android.os.Bundle
 import android.view.LayoutInflater
