@@ -30,4 +30,9 @@
     <string name="pressure">Pressure</string>
     <string name="initial_setting">Initial Setting</string>
     <string name="ok">OK</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
+    <string name="cloud">Cloud</string>
+    <string name="ultra_violet">Ultra Violet</string>
+    <string name="visibility">Visibility</string>
 </resources>

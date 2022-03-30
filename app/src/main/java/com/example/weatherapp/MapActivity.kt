@@ -32,7 +32,7 @@ import com.google.android.gms.location.LocationServices
 class MapActivity : FragmentActivity(), OnMapReadyCallback {
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private val permissionCode = 101
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_map)
@@ -52,7 +52,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
         ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), permissionCode
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_CODE
             )
             return
         }
@@ -84,7 +84,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            permissionCode -> if (grantResults.isNotEmpty() && grantResults[0] ==
+            PERMISSION_CODE -> if (grantResults.isNotEmpty() && grantResults[0] ==
                 PackageManager.PERMISSION_GRANTED
             ) {
                 fetchLocation()

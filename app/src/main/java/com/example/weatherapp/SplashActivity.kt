@@ -18,9 +18,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.weatherapp.databinding.ActivitySplushBinding
 import com.google.android.gms.location.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-const val PERMISSION_ID = 1000
+
 
 class SplashActivity : AppCompatActivity() {
 
@@ -65,7 +67,7 @@ class SplashActivity : AppCompatActivity() {
         arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION),
-            PERMISSION_ID
+            PERMISSION_ID_GPS
         )
     }
 
@@ -145,7 +147,7 @@ class SplashActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == PERMISSION_ID){
+        if(requestCode == PERMISSION_ID_GPS){
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Log.i("TAG", "onRequestPermissionsResult: have Permission")
             }
