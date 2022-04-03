@@ -15,13 +15,13 @@ class WeatherClient private constructor(): RemoteSource {
     }
 
     override suspend fun getCurrentWeather(
-        lat: Float,
-        lon: Float,
-        exclude: String,
-        appid: String
+        lat: Double,
+        lon: Double,
+        lang: String,
+        units: String
     ): WeatherAPI {
         val weatherService = RetrofitClient.getClient()?.create(RetrofitInterface::class.java)
-        return weatherService!!.getCurrentWeather(lat, lon, exclude, appid)
+        return weatherService!!.getCurrentWeather(lat, lon, lang, units)
     }
 
 

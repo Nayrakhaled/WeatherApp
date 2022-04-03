@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">الطقس</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">الاعدادات</string>
+
+    <string name="menu_home">الرئيسية</string>
+    <string name="menu_setting">الاعدادات</string>
+    <string name="menu_favourite">المفضل</string>
+    <string name="weather">الطقس</string>
+    <string name="location">المكان</string>
+    <string name="gps">الموقع الحالي </string>
+    <string name="map">الخريطه</string>
+    <string name="language">اللغه</string>
+    <string name="english">الانجليزيه</string>
+    <string name="arabic">العربيه</string>
+    <string name="kelvin">كيلفين</string>
+    <string name="celsius">سيلزيس</string>
+    <string name="fahrenheit">فرهنهايد</string>
+    <string name="temperature">درجه الحرارة</string>
+    <string name="meter_sec">م/ث</string>
+    <string name="mile_hour">م/س</string>
+    <string name="notification">الاشعارات</string>
+    <string name="enable">تفعيل</string>
+    <string name="disable">الغاء</string>
+    <string name="pressure">الضغط</string>
+    <string name="initial_setting">الاعدادات</string>
+    <string name="ok">موافق</string>
+    <string name="humidity">الرطوبة</string>
+    <string name="wind">الرياح</string>
+    <string name="cloud">السحاب</string>
+    <string name="ultra_violet">فوق بنفسجي</string>
+    <string name="visibility">الرؤيه</string>
+</resources>

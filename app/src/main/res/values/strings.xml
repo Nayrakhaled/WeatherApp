@@ -16,8 +16,6 @@
     <string name="gps">Gps</string>
     <string name="map">Map</string>
     <string name="language">Language</string>
-    <string name="english">English</string>
-    <string name="arabic">Arabic</string>
     <string name="kelvin">Kelvin</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
@@ -35,4 +33,7 @@
     <string name="cloud">Cloud</string>
     <string name="ultra_violet">Ultra Violet</string>
     <string name="visibility">Visibility</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="confirm">Confirm</string>
 </resources>

@@ -4,5 +4,10 @@ import com.example.weatherapp.model.WeatherAPI
 
 interface RemoteSource {
 
-    suspend fun getCurrentWeather( lat: Float, lon: Float, exclude: String, appid: String): WeatherAPI
+    suspend fun getCurrentWeather(
+        lat: Double,
+        lon: Double,
+        lang: String,
+        units: String
+    ): WeatherAPI
 }

@@ -16,12 +16,13 @@
         android:theme="@style/Theme.WeatherApp">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCiSh4VnnI1jemtZTytDoj2X7Wl6evey30" />
-        <activity android:name=".SplashActivity"/>
-        <activity android:name=".MapActivity"/>
+            android:value="AIzaSyD3pywsP4RHuokNdrfb0lJDioZMUdLd_v8" />
+
+        <activity android:name=".HomeActivity"/>
+        <activity android:name=".mpa.view.MapsActivity"/>
 
         <activity
-            android:name=".HomeActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

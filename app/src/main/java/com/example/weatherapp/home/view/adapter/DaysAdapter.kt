@@ -14,33 +14,37 @@ import com.example.weatherapp.ICON_URL
 import com.example.weatherapp.R
 import com.example.weatherapp.home.view.HomeFragment
 import com.example.weatherapp.model.Daily
+import kotlin.math.roundToInt
 
 class DaysAdapter(private var listDays: List<Daily>, var context: Context): RecyclerView.Adapter<DaysAdapter.ViewHolder>() {
 
+    lateinit var temp: String
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.row_daily, parent, false)
         return ViewHolder(view)
     }
 
-    fun setDaysList(dailyList: List<Daily>) {
+    fun setDaysList(dailyList: List<Daily>, temp: String) {
         this.listDays = dailyList
+        this.temp = temp
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val daily: Daily = listDays!![position]
         holder.textDay.text = HomeFragment.convertUTCToLocalDate(daily.dt, "EEE")
         holder.textDesc.text = daily.weather[0].main
-        holder.textTemp.text = "${daily.temp.min } / ${ daily.temp.max}"
+        holder.textTemp.text = "${daily.temp.min.roundToInt()} / ${ daily.temp.max.roundToInt()} $temp"
         Glide.with(context).load(ICON_URL + daily.weather[0].icon + EXTENDED_IMG).into(holder.imgDays)
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgDays: ImageView = view.findViewById(R.id.img_days)
         val textDay: TextView = view.findViewById(R.id.txt_days_name)
         val textDesc: TextView = view.findViewById(R.id.txt_days_desc)
         val textTemp: TextView = view.findViewById(R.id.txt_days_temp)
     }
 
-    override fun getItemCount(): Int = listDays.size
+    override fun getItemCount(): Int = listDays.size-1
 }
