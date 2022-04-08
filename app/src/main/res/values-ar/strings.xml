@@ -13,6 +13,7 @@
     <string name="menu_home">الرئيسية</string>
     <string name="menu_setting">الاعدادات</string>
     <string name="menu_favourite">المفضل</string>
+    <string name="menu_alert">الاشعارات</string>
     <string name="weather">الطقس</string>
     <string name="location">المكان</string>
     <string name="gps">الموقع الحالي </string>
@@ -37,4 +38,19 @@
     <string name="cloud">السحاب</string>
     <string name="ultra_violet">فوق بنفسجي</string>
     <string name="visibility">الرؤيه</string>
+
+    <string name="confirm">الموافقه</string>
+    <string name="wind_speed">الرياح </string>
+    <string name="dot">-</string>
+    <string name="from">من</string>
+    <string name="to">الي</string>
+
+    <string name="hpa">ه.ب.ا</string>
+    <string name="m">م</string>
+    <string name="k">ك</string>
+    <string name="f">ف</string>
+    <string name="c">س</string>
+    <string name="m_s">م/ث</string>
+    <string name="m_h">م/س</string>
+
 </resources>

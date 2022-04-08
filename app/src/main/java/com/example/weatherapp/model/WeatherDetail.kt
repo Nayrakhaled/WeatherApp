@@ -38,3 +38,20 @@ data class Hourly(
     var temp: Float,
     var weather: List<Weather>
 )
+
+data class Alerts(
+    var sender_name: String,
+    var event: String,
+    var start: Int,
+    var end: Int,
+    var description: String,
+)
+
+data class AlertModel(
+    var dateFrom: String,
+    var timeFrom: String,
+    var dateTo: String,
+    var timeTo: String,
+) {
+    constructor() : this("", "", "", "")
+}

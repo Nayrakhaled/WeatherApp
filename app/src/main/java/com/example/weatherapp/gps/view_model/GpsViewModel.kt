@@ -4,6 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Looper
 import android.util.Log
@@ -13,6 +15,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
+import java.util.*
+
 
 class GpsViewModel(var context: Context) : ViewModel() {
 
@@ -23,7 +27,6 @@ class GpsViewModel(var context: Context) : ViewModel() {
     private lateinit var locationRequest: LocationRequest
 
 
-
     @SuppressLint("MissingPermission")
      fun getLastLocation() {
         mFusedLocation.lastLocation.addOnCompleteListener { task ->
@@ -31,7 +34,14 @@ class GpsViewModel(var context: Context) : ViewModel() {
             if (location == null) {
                 getNewLocation()
             } else _location.postValue(LatLng(location.latitude, location.longitude))
+
         }
+    }
+
+    fun getCity(loc: LatLng): String{
+        val geocoder = Geocoder(context, Locale.getDefault())
+        val addresses: List<Address> = geocoder.getFromLocation(loc.latitude, loc.longitude, 1)
+        return addresses[0].featureName
     }
 
     private fun getNewLocation() {

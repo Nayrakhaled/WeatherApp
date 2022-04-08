@@ -10,7 +10,7 @@ interface WeatherDAO {
     @Query("SELECT * From weather")
     suspend fun getWeather(): WeatherAPI
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(weather: WeatherAPI)
 
     @Delete

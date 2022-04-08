@@ -15,6 +15,7 @@ interface RepositoryInterface {
 
     //SharedPrefs
     fun saveSetting(keyName: String, valueName: String)
+    fun saveSettingInt(keyName: String, valueName: Int)
     fun getSetting(): SharedPreferences
 
     //Room Weather
@@ -25,5 +26,6 @@ interface RepositoryInterface {
     fun insertFav(weather: WeatherAPI)
     suspend fun getAllFavWeather(): List<WeatherAPI>
     suspend fun getFavWeather(city: String): WeatherAPI
+    suspend fun deleteFav(weather: WeatherAPI)
 
 }

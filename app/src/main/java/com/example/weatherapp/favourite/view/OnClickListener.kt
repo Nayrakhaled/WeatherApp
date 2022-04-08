@@ -5,4 +5,6 @@ import com.example.weatherapp.model.WeatherAPI
 interface OnClickListener {
 
     fun onClick(weather: WeatherAPI)
+
+    fun onClickDelete(weather: WeatherAPI)
 }

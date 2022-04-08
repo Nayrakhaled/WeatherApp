@@ -17,5 +17,5 @@ interface FavDAO {
     fun insertFav(weather: WeatherAPI)
 
     @Query("DELETE From weather WHERE timezone LIKE :city")
-    fun deleteFav(city: String)
+    suspend fun deleteFav(city: String)
 }

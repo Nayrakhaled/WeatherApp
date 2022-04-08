@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,6 @@ import com.example.weatherapp.model.WeatherAPI
 import com.example.weatherapp.model.repository.Repository
 import com.example.weatherapp.mpa.view.MapsActivity
 import com.example.weatherapp.remote.WeatherClient
-import com.google.android.gms.maps.model.LatLng
 
 
 class FavouriteFragment : Fragment(), OnClickListener {
@@ -55,10 +55,25 @@ class FavouriteFragment : Fragment(), OnClickListener {
         favAdapter = FavAdapter(ArrayList(), this, requireContext())
         binding.rvFav.adapter = favAdapter
 
-        binding.fab.setOnClickListener{
-            startActivity(Intent(requireContext(), MapsActivity::class.java))
+        favViewModel.getAllFavWeather()
+        favViewModel.favWeather.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.imgNoneFav.isVisible = true
+            } else {
+                Log.i("TAG", "onCreateView:size ${it.size}")
+                favAdapter.setFavList(it)
+                favAdapter.notifyDataSetChanged()
+                binding.imgNoneFav.isVisible = false
+            }
         }
-        Log.i("TAG", "onCreateView Fav: ${MapsActivity.latLng.latitude}")
+        binding.fab.setOnClickListener {
+            startActivity(
+                Intent(requireContext(), MapsActivity::class.java).putExtra(
+                    "favourite",
+                    "fav"
+                )
+            )
+        }
 
         return binding.root
     }
@@ -70,5 +85,22 @@ class FavouriteFragment : Fragment(), OnClickListener {
 
     override fun onClick(weather: WeatherAPI) {
 
+    }
+
+    override fun onClickDelete(weather: WeatherAPI) {
+        favViewModel.deleteFavWeather(weather)
+        favViewModel.getAllFavWeather()
+        favViewModel.favWeather.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.imgNoneFav.isVisible = true
+                favAdapter.setFavList(it)
+                favAdapter.notifyDataSetChanged()
+            } else {
+                Log.i("TAG", "onCreateView:size ${it.size}")
+                favAdapter.setFavList(it)
+                favAdapter.notifyDataSetChanged()
+                binding.imgNoneFav.isVisible = false
+            }
+        }
     }
 }

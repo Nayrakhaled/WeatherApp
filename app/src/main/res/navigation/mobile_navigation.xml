@@ -18,6 +18,13 @@
         tools:layout="@layout/fragment_favourite" />
 
     <fragment
+        android:id="@+id/nav_alert"
+        android:name="com.example.weatherapp.alert.view.AlertFragment"
+        android:label="@string/menu_alert"
+        tools:layout="@layout/fragment_alerts" />
+
+
+    <fragment
         android:id="@+id/nav_setting"
         android:name="com.example.weatherapp.setting.view.SettingFragment"
         android:label="@string/menu_setting"

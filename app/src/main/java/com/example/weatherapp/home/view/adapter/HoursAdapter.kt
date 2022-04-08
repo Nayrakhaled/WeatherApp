@@ -14,27 +14,30 @@ import com.example.weatherapp.ICON_URL
 import com.example.weatherapp.R
 import com.example.weatherapp.home.view.HomeFragment
 import com.example.weatherapp.model.Hourly
+import java.util.*
 import kotlin.math.roundToInt
 
 class HoursAdapter(private var listHours: List<Hourly>, var context: Context):
     RecyclerView.Adapter<HoursAdapter.ViewHolder>() {
 
-    lateinit var temp: String
+    private lateinit var temp: String
+    lateinit var lang: String
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.row_hourly, parent, false)
         return ViewHolder(view)
     }
 
-    fun setHoursList(hourlyList: List<Hourly>, temp: String) {
+    fun setHoursList(hourlyList: List<Hourly>, temp: String, lang: String) {
         this.listHours = hourlyList
         this.temp = temp
+        this.lang = lang
     }
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val hourly: Hourly = listHours!![position]
-        holder.textTime.text = HomeFragment.convertUTCToLocalDate(hourly.dt, "hh")
-        holder.textTemp.text = "${hourly.temp.roundToInt()} $temp"
+        holder.textTime.text = HomeFragment.convertUTCToLocalDate(hourly.dt, "hh:mm a", lang)
+        holder.textTemp.text = String.format(Locale(lang), "%d",hourly.temp.toInt())
         Glide.with(context).load(ICON_URL + hourly.weather[0].icon + EXTENDED_IMG).into(holder.imgHourly)
     }
 

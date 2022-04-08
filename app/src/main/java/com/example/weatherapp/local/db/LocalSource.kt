@@ -11,4 +11,5 @@ interface LocalSource {
     fun insertFav(weather: WeatherAPI)
     suspend fun getAllFavWeather(): List<WeatherAPI>
     suspend fun getFavWeather(city: String): WeatherAPI
+    suspend fun deleteFav(weather: WeatherAPI)
 }

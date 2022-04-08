@@ -34,6 +34,10 @@ class Repository(
         sharedPrefs.saveSetting(keyName, valueName)
     }
 
+    override fun saveSettingInt(keyName: String, valueName: Int) {
+        sharedPrefs.saveSettingInt(keyName, valueName)
+    }
+
     override fun getSetting(): SharedPreferences {
         return sharedPrefs.getSetting()
     }
@@ -56,5 +60,9 @@ class Repository(
 
     override suspend fun getFavWeather(city: String): WeatherAPI {
         return localSource.getFavWeather(city)
+    }
+
+    override suspend fun deleteFav(weather: WeatherAPI) {
+        localSource.deleteFav(weather)
     }
 }

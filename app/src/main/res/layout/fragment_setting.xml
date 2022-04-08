@@ -240,7 +240,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:text="Wind Speed"
+                android:text="@string/wind_speed"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -268,14 +268,14 @@
 
                 <RadioButton
                     android:id="@+id/radioButton_meter"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/meter_sec"
                     android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton_mile"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mile_hour"
                     android:textSize="18sp" />
@@ -290,20 +290,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_notification"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.5"
         android:layout_height="wrap_content"
-       app:layout_constraintTop_toBottomOf="@id/layout_temp"
-        app:layout_constraintStart_toStartOf="@id/layout_temp">
+        app:layout_constraintStart_toStartOf="@id/layout_temp"
+        app:layout_constraintTop_toBottomOf="@id/layout_temp"
+        app:layout_constraintWidth_percent="0.5">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_notification"
             android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.6"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/card_text"
-            android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.6">
 
             <TextView
                 android:id="@+id/text5"
@@ -320,10 +321,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.95"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/constraint_notification"
             app:layout_constraintTop_toBottomOf="@id/constraint_notification"
-            app:layout_constraintStart_toStartOf="@id/constraint_notification">
+            app:layout_constraintWidth_percent="0.95">
 
 
             <RadioGroup
@@ -331,11 +332,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#024CAF50"
-                app:layout_constraintWidth_percent="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.24000001">
+                app:layout_constraintVertical_bias="0.24000001"
+                app:layout_constraintWidth_percent="1">
 
                 <RadioButton
                     android:id="@+id/radioButton_enable"
@@ -355,4 +356,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <Button
+        android:id="@+id/setting_btn_ok"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.7"
+        android:backgroundTint="@color/teal_700"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="113dp"
+        android:text="@string/confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_notification" />
 </androidx.constraintlayout.widget.ConstraintLayout>

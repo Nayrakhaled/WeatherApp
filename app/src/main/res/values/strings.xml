@@ -12,6 +12,7 @@
     <string name="menu_setting">Setting</string>
     <string name="menu_favourite">Favorite</string>
     <string name="weather">Weather</string>
+    <string name="menu_alert">Alerts</string>
     <string name="location">Location</string>
     <string name="gps">Gps</string>
     <string name="map">Map</string>
@@ -36,4 +37,17 @@
     <string name="arabic">Arabic</string>
     <string name="english">English</string>
     <string name="confirm">Confirm</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="dot">-</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+
+    <string name="hpa">hpa</string>
+    <string name="m">m</string>
+    <string name="k">K</string>
+    <string name="f">F</string>
+    <string name="c">C</string>
+    <string name="m_s">m/s</string>
+    <string name="m_h">m/h</string>
+
 </resources>

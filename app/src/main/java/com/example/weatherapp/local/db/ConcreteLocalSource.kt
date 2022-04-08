@@ -39,9 +39,9 @@ class ConcreteLocalSource (context: Context) : LocalSource {
         return daoFV!!.getWeatherFav(city)
     }
 
-//    override fun deleteMovie(movie: Movie) {
-//        //Thread { dao?.delete(movie) }.start()
-//        dao?.delete(movie)
-//    }
+    override suspend fun deleteFav(weather: WeatherAPI) {
+        daoFV?.deleteFav(weather.timezone)
+    }
+
 
 }

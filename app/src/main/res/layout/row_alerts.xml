@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="20sp"
+    android:outlineSpotShadowColor="@color/black"
+    android:outlineAmbientShadowColor="@color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="UnusedAttribute">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txt_alert_time_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/app_name"
+            android:layout_marginStart="15sp"
+            android:layout_marginTop="15sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/txt_alert_date_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="@string/app_name"
+            android:layout_marginTop="15sp"
+            app:layout_constraintTop_toBottomOf="@id/txt_alert_time_from"
+            app:layout_constraintStart_toStartOf="@id/txt_alert_time_from"
+            />
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/dot"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/txt_alert_date_from"
+            app:layout_constraintTop_toTopOf="@+id/txt_alert_time_from" />
+
+        <TextView
+            android:id="@+id/txt_alert_time_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/app_name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/txt"
+            app:layout_constraintTop_toTopOf="@id/txt_alert_time_from" />
+
+        <TextView
+            android:id="@+id/txt_alert_date_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="@string/app_name"
+            android:layout_marginTop="15sp"
+            app:layout_constraintTop_toBottomOf="@id/txt_alert_time_to"
+            app:layout_constraintStart_toStartOf="@id/txt_alert_time_to"
+            />
+
+        <ImageView
+            android:id="@+id/img_delete_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_delete_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="35sp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <TextView
+            android:id="@+id/tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="15sp"
+            app:layout_constraintTop_toBottomOf="@id/txt_alert_date_from"
+            app:layout_constraintStart_toStartOf="@id/txt_alert_time_to"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

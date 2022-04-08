@@ -19,13 +19,6 @@ class FavouriteViewModel(private val repo: Repository) : ViewModel() {
     val favWeather: LiveData<List<WeatherAPI>> = _favWeather
 
 
-    fun insertFavWeather(weather: WeatherAPI) {
-        viewModelScope.launch(Dispatchers.IO){
-            repo.insertFav(weather)
-        }
-    }
-
-
 
     fun getAllFavWeather(){
         viewModelScope.launch {
@@ -33,6 +26,15 @@ class FavouriteViewModel(private val repo: Repository) : ViewModel() {
             withContext(Dispatchers.Main) {
                 _favWeather.postValue(fav)
             }
+        }
+    }
+
+    fun deleteFavWeather(weatherAPI: WeatherAPI){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                repo.deleteFav(weatherAPI)
+            }
+           getAllFavWeather()
         }
     }
 

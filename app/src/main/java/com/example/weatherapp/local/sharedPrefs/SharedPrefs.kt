@@ -32,6 +32,12 @@ class SharedPrefs private constructor() : SharedPrefsInterface {
         editor!!.commit()
     }
 
+    override fun saveSettingInt(keyName: String, valueName: Int) {
+        editor!!.putInt(keyName, valueName)
+        editor!!.commit()
+    }
+
+
     override fun getSetting(): SharedPreferences {
         return sharedPreferences
     }

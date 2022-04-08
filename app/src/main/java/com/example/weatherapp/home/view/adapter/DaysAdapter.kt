@@ -14,28 +14,31 @@ import com.example.weatherapp.ICON_URL
 import com.example.weatherapp.R
 import com.example.weatherapp.home.view.HomeFragment
 import com.example.weatherapp.model.Daily
+import java.util.*
 import kotlin.math.roundToInt
 
 class DaysAdapter(private var listDays: List<Daily>, var context: Context): RecyclerView.Adapter<DaysAdapter.ViewHolder>() {
 
-    lateinit var temp: String
+    private lateinit var temp: String
+    lateinit var lang: String
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.row_daily, parent, false)
         return ViewHolder(view)
     }
 
-    fun setDaysList(dailyList: List<Daily>, temp: String) {
+    fun setDaysList(dailyList: List<Daily>, temp: String, lang: String) {
         this.listDays = dailyList
         this.temp = temp
+        this.lang = lang
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val daily: Daily = listDays!![position]
-        holder.textDay.text = HomeFragment.convertUTCToLocalDate(daily.dt, "EEE")
-        holder.textDesc.text = daily.weather[0].main
-        holder.textTemp.text = "${daily.temp.min.roundToInt()} / ${ daily.temp.max.roundToInt()} $temp"
+        holder.textDay.text = HomeFragment.convertUTCToLocalDate(daily.dt, "EEE", lang)
+        holder.textDesc.text = String.format(Locale(lang), "%s", daily.weather[0].main)
+        holder.textTemp.text = "${String.format(Locale(lang),"%d",daily.temp.min.roundToInt())} / ${String.format(Locale(lang), "%d",daily.temp.max.roundToInt())}  $temp"
         Glide.with(context).load(ICON_URL + daily.weather[0].icon + EXTENDED_IMG).into(holder.imgDays)
     }
 

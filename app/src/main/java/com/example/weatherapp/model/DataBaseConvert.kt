@@ -19,6 +19,29 @@ class DataBaseConvert : Serializable {
     }
 
     @TypeConverter
+    fun objectAlertsListToString(data: List<Alerts?>?): String? {
+        if (data == null) {
+            return null
+        }
+        val gson = Gson()
+        val type =
+            object : TypeToken<List<Alerts?>?>() {}.type
+        return gson.toJson(data, type)
+    }
+
+    @TypeConverter
+    fun stringAlertsObjectList(data: String?): List<Alerts> {
+        if (data == null) {
+            return emptyList()
+        }
+        val listType = object : TypeToken<List<Alerts?>?>() {}.type
+        return gson.fromJson<List<Alerts>>(
+            data,
+            listType
+        )
+    }
+
+    @TypeConverter
     fun objectDailyListToString(data: List<Daily?>?): String? {
         if (data == null) {
             return null

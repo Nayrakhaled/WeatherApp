@@ -23,22 +23,29 @@
         <entry key="..\:/ITI/ITI_labs/kotlin/FinalProject/app/src/main/res/menu/main_activity2.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/drawable/card.xml" value="0.1505" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/drawable/card_text.xml" value="0.1505" />
+        <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/drawable/popup_background.xml" value="0.152" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout-v28/activity_maps.xml" value="0.11548913043478261" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout-v28/row_days.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.11277173913043478" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/app_bar_main.xml" value="0.11277173913043478" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/content_main.xml" value="0.11277173913043478" />
+        <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/dialog_alert.xml" value="0.22" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/dialog_screen.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/fragment_alerts.xml" value="0.11684782608695653" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/fragment_favourite.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/fragment_home.xml" value="0.3065512978986403" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/fragment_map.xml" value="0.11231884057971014" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/fragment_setting.xml" value="0.25" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/nav_header_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/row_alert.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/row_alerts.xml" value="0.22" />
+        <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/row_daily.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/row_days.xml" value="0.20416666666666666" />
-        <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/row_fav.xml" value="0.11277173913043478" />
+        <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/row_fav.xml" value="0.25" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/row_hourly.xml" value="0.5" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/layout/row_hours.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI/ITI_labs/kotlin/WeatherApp/app/src/main/res/menu/main_activity2.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

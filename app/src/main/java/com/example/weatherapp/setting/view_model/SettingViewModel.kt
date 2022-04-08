@@ -14,9 +14,9 @@ class SettingViewModel(private val repo: Repository) : ViewModel() {
     val setting: LiveData<SharedPreferences> = _setting
 
 
-    fun saveSetting(keyName: String, valueName: String){
+    fun saveSetting(keyName: String, valueName: Int){
         Log.i("TAG", "saveSetting: $valueName")
-        repo.saveSetting(keyName, valueName)
+        repo.saveSettingInt(keyName, valueName)
     }
 
     fun getSetting(){
