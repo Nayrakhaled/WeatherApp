@@ -1,6 +1,7 @@
 package com.example.weatherapp.model.repository
 
 import android.content.SharedPreferences
+import com.example.weatherapp.model.Alerts
 import com.example.weatherapp.model.Weather
 import com.example.weatherapp.model.WeatherAPI
 

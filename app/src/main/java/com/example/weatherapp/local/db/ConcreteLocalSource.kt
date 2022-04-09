@@ -5,6 +5,7 @@ import com.example.weatherapp.local.db.favourite.FavDAO
 import com.example.weatherapp.local.db.favourite.FavDataBase
 import com.example.weatherapp.local.db.weather.AppDataBase
 import com.example.weatherapp.local.db.weather.WeatherDAO
+import com.example.weatherapp.model.Alerts
 
 import com.example.weatherapp.model.WeatherAPI
 
@@ -26,6 +27,7 @@ class ConcreteLocalSource (context: Context) : LocalSource {
     override suspend fun getWeather(): WeatherAPI {
        return dao!!.getWeather()
     }
+
 
     override fun insertFav(weather: WeatherAPI) {
         daoFV?.insertFav(weather)

@@ -14,5 +14,9 @@ data class WeatherAPI(
     var daily: List<Daily>,
     var hourly: List<Hourly>,
     var alerts: List<Alerts>?,
-)
+) {
+    constructor() : this(0.0, 0.0, "",
+        Current(0, 0.0F, 0, 0, 0, 0.0F, listOf(),
+        0, 0.0F), listOf(), listOf(), listOf())
+}
 

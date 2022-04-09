@@ -30,12 +30,12 @@ class DataBaseConvert : Serializable {
     }
 
     @TypeConverter
-    fun stringAlertsObjectList(data: String?): List<Alerts> {
+    fun stringAlertsObjectList(data: String?): List<Alerts>? {
         if (data == null) {
             return emptyList()
         }
         val listType = object : TypeToken<List<Alerts?>?>() {}.type
-        return gson.fromJson<List<Alerts>>(
+        return gson.fromJson<List<Alerts>?>(
             data,
             listType
         )

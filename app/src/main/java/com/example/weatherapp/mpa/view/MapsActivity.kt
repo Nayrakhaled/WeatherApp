@@ -82,9 +82,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             currentLocation.longitude,
                             lang, temp
                         )
-
-                        lifecycleScope.launch { Thread.sleep(2000) }
-
+                        HomeFragment.flag = 1
                     }
                 }
                 else -> {

@@ -49,12 +49,11 @@ class FavouriteFragment : Fragment(), OnClickListener {
         favViewModel =
             ViewModelProvider(this, favViewModelFactory)[FavouriteViewModel::class.java]
 
-
         binding.rvFav.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         favAdapter = FavAdapter(ArrayList(), this, requireContext())
         binding.rvFav.adapter = favAdapter
-
+        Log.i("TAG", "onCreateView: favvvv")
         favViewModel.getAllFavWeather()
         favViewModel.favWeather.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {

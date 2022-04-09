@@ -24,16 +24,15 @@ class GpsViewModel(var context: Context) : ViewModel() {
     val location: LiveData<LatLng> = _location
     private var mFusedLocation: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
-    private lateinit var locationRequest: LocationRequest
 
 
     @SuppressLint("MissingPermission")
      fun getLastLocation() {
-        mFusedLocation.lastLocation.addOnCompleteListener { task ->
-            val location: Location? = task.result
-            if (location == null) {
+        mFusedLocation.lastLocation.addOnSuccessListener {
+
+            if (it == null) {
                 getNewLocation()
-            } else _location.postValue(LatLng(location.latitude, location.longitude))
+            } else _location.postValue(LatLng(it.latitude, it.longitude))
 
         }
     }
@@ -41,34 +40,27 @@ class GpsViewModel(var context: Context) : ViewModel() {
     fun getCity(loc: LatLng): String{
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses: List<Address> = geocoder.getFromLocation(loc.latitude, loc.longitude, 1)
-        return addresses[0].featureName
+        return addresses[0].countryName
     }
 
+    @SuppressLint("MissingPermission")
     private fun getNewLocation() {
         mFusedLocation = LocationServices.getFusedLocationProviderClient(context)
-        locationRequest = LocationRequest.create()
+        val locationRequest: LocationRequest = LocationRequest.create()
         locationRequest.interval = 10000
         locationRequest.fastestInterval = 5000
         locationRequest.numUpdates = 1
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-
-        if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
+        val mLocationCallback : LocationCallback = object : LocationCallback(){
+            override fun onLocationResult(onLocalResult: LocationResult?) {
+                super.onLocationResult(onLocalResult)
+                val loc : Location = onLocalResult!!.lastLocation
+                _location.postValue(LatLng(loc.latitude,loc.longitude))
+            }
         }
-        mFusedLocation.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+        mFusedLocation.requestLocationUpdates(
+            locationRequest, mLocationCallback,
+            Looper.myLooper()
+        )
     }
-    private val locationCallback = object : LocationCallback(){
-        override fun onLocationResult(p0: LocationResult) {
-            val lastLocation: Location = p0.lastLocation
-            Log.i("TAG", "onLocationResult: ${lastLocation.longitude}")
-        }
-    }
-
 }

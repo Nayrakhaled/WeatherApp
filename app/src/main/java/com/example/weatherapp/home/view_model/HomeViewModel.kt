@@ -1,6 +1,7 @@
 package com.example.weatherapp.home.view_model
 
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,6 +41,11 @@ class HomeViewModel(private val repo: Repository) : ViewModel() {
         viewModelScope.launch(Dispatchers.IO){
             repo.insertWeather(weather)
         }
+    }
+
+    fun saveSetting(keyName: String, valueName: String){
+        Log.i("TAG", "saveSetting: $valueName")
+        repo.saveSetting(keyName, valueName)
     }
 
      fun getWeather(){

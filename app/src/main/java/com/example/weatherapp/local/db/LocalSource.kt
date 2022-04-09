@@ -1,5 +1,6 @@
 package com.example.roomdemomvvm.db
 
+import com.example.weatherapp.model.Alerts
 import com.example.weatherapp.model.WeatherAPI
 
 interface LocalSource {

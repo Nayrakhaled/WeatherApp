@@ -85,9 +85,10 @@ class HomeFragment : Fragment() {
                 } else {
                     Log.i("TAG", "onCreateView: Gps")
                     gpsViewModel.getLastLocation()
-
                     gpsViewModel.location.observe(viewLifecycleOwner) { loc ->
                         Log.i("TAG", "onCreateView: ${loc.latitude}")
+                        homeViewModel.saveSetting("lat", loc.latitude.toString())
+                        homeViewModel.saveSetting("log", loc.longitude.toString())
                         homeViewModel.getCurrentWeather(
                             loc.latitude,
                             loc.longitude, lang, temp
@@ -331,6 +332,7 @@ class HomeFragment : Fragment() {
 //    }
 
     companion object {
+        var flag = 0
         fun convertUTCToLocalDate(time: Long, format: String, lang: String): String {
             val timeD = Date(time * 1000)
             val sdf = SimpleDateFormat(format, Locale(lang))
@@ -346,15 +348,12 @@ class HomeFragment : Fragment() {
                 if (capabilities != null) {
                     when {
                         capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                            Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
                             return true
                         }
                         capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                            Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
                             return true
                         }
                         capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                            Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
                             return true
                         }
                     }

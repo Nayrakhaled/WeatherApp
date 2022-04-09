@@ -2,8 +2,10 @@ package com.example.weatherapp.local.db.weather
 
 
 import androidx.room.*
+import com.example.weatherapp.model.Alerts
 import com.example.weatherapp.model.Weather
 import com.example.weatherapp.model.WeatherAPI
+import org.jetbrains.annotations.Nullable
 
 @Dao
 interface WeatherDAO {

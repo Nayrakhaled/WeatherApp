@@ -37,8 +37,8 @@ class DaysAdapter(private var listDays: List<Daily>, var context: Context): Recy
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val daily: Daily = listDays!![position]
         holder.textDay.text = HomeFragment.convertUTCToLocalDate(daily.dt, "EEE", lang)
-        holder.textDesc.text = String.format(Locale(lang), "%s", daily.weather[0].main)
-        holder.textTemp.text = "${String.format(Locale(lang),"%d",daily.temp.min.roundToInt())} / ${String.format(Locale(lang), "%d",daily.temp.max.roundToInt())}  $temp"
+        holder.textDesc.text = daily.weather[0].description
+        holder.textTemp.text = "${String.format(Locale(lang),"%d", daily.temp.min.roundToInt())} / ${String.format(Locale(lang), "%d",daily.temp.max.roundToInt())}  $temp"
         Glide.with(context).load(ICON_URL + daily.weather[0].icon + EXTENDED_IMG).into(holder.imgDays)
     }
 

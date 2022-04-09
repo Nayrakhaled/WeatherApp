@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.roomdemomvvm.db.LocalSource
 import com.example.weatherapp.local.sharedPrefs.SharedPrefsInterface
+import com.example.weatherapp.model.Alerts
 import com.example.weatherapp.model.Weather
 import com.example.weatherapp.model.WeatherAPI
 import com.example.weatherapp.remote.RemoteSource

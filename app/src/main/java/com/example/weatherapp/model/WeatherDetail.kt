@@ -52,6 +52,4 @@ data class AlertModel(
     var timeFrom: String,
     var dateTo: String,
     var timeTo: String,
-) {
-    constructor() : this("", "", "", "")
-}
+)
