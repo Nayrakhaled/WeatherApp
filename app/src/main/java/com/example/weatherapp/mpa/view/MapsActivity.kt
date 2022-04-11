@@ -32,6 +32,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -83,7 +84,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             currentLocation.longitude,
                             lang, temp
                         )
-                        HomeFragment.flag = 1
+                        Thread.sleep(2000)
                     }
                 }
                 else -> {

@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
+import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -103,25 +104,32 @@ class AlertWorker(var context: Context, workerParams: WorkerParameters) :
             applicationContext, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
         )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val audioAttributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .build()
+
             val name: CharSequence = "channel"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance)
             channel.description = desc
+            channel.description = desc
+            channel.setSound(
+                Uri.parse("${ContentResolver.SCHEME_ANDROID_RESOURCE}://${context.packageName}/raw/stormthunder"),
+                audioAttributes
+            )
             val notificationManager = applicationContext.getSystemService(
                 NotificationManager::class.java
             )
             notificationManager.createNotificationChannel(channel)
         }
-        val sound =
-            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.packageName + "/raw/storm_thunder.mp3")
-//        val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
         val notification: Notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_cloud_24)
             .setContentTitle(title)
             .setContentText(desc)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(notifyPendingIntent)
-            .setSound(sound)
             .setAutoCancel(true).build()
         val managerCompat = NotificationManagerCompat.from(
             applicationContext

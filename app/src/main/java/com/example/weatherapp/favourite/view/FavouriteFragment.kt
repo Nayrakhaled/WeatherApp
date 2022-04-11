@@ -53,16 +53,15 @@ class FavouriteFragment : Fragment(), OnClickListener {
             if (list.isEmpty()) {
                 binding.imgNoneFav.isVisible = true
             } else {
+                Log.i("TAG", "onCreateView: ${list.size}")
                 homeViewModel.getDataFromShared()
                 homeViewModel.data.observe(viewLifecycleOwner) {
                     val lang = when {
                         it.getInt("Language", -1) == 1 -> "ar"
                         else -> "en"
                     }
-                    favAdapter.setFavList(
-                        list,
-                        gpsViewModel.getCity(LatLng(list[0].lat, list[0].lon), lang)
-                    )
+                    favAdapter.setFavList(list, lang)
+
                     favAdapter.notifyDataSetChanged()
                     binding.imgNoneFav.isVisible = false
                 }
@@ -109,7 +108,7 @@ class FavouriteFragment : Fragment(), OnClickListener {
 
         binding.rvFav.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        favAdapter = FavAdapter(ArrayList(), this, requireContext())
+        favAdapter = FavAdapter(ArrayList(), this, requireContext(), gpsViewModel)
         binding.rvFav.adapter = favAdapter
     }
 
@@ -131,6 +130,7 @@ class FavouriteFragment : Fragment(), OnClickListener {
         favViewModel.deleteFavWeather(weather)
         favViewModel.getAllFavWeather()
         favViewModel.favWeather.observe(viewLifecycleOwner) {
+            Log.i("TAG", "onClickDelete: ${it.size}")
             if (it.isEmpty()) {
                 binding.imgNoneFav.isVisible = true
                 favAdapter.setFavList(it, "")
@@ -140,6 +140,29 @@ class FavouriteFragment : Fragment(), OnClickListener {
                 favAdapter.setFavList(it, "")
                 favAdapter.notifyDataSetChanged()
                 binding.imgNoneFav.isVisible = false
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        favViewModel.getAllFavWeather()
+        favViewModel.favWeather.observe(viewLifecycleOwner) { list ->
+            if (list.isEmpty()) {
+                binding.imgNoneFav.isVisible = true
+            } else {
+                Log.i("TAG", "onStart: ${list.size}")
+                homeViewModel.getDataFromShared()
+                homeViewModel.data.observe(viewLifecycleOwner) {
+                    val lang = when {
+                        it.getInt("Language", -1) == 1 -> "ar"
+                        else -> "en"
+                    }
+                    favAdapter.setFavList(list, lang)
+
+                    favAdapter.notifyDataSetChanged()
+                    binding.imgNoneFav.isVisible = false
+                }
             }
         }
     }

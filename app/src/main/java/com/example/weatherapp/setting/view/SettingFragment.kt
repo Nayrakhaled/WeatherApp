@@ -106,10 +106,6 @@ class SettingFragment : Fragment() {
             settingViewModel.saveSetting("Speed", binding.radioGroupSpeed.indexOfChild(radio))
             settingViewModel.saveSetting("Temp", binding.radioGroupTemp.indexOfChild(radio))
         }
-        binding.radioGroupNotification.setOnCheckedChangeListener { _, checkedId ->
-            val radio: View = binding.radioGroupNotification.findViewById(checkedId)
-            settingViewModel.saveSetting("Notification", binding.radioGroupNotification.indexOfChild(radio))
-        }
 
         binding.settingBtnOk.setOnClickListener {
             settingViewModel.setting.observe(viewLifecycleOwner) { prefs->

@@ -20,4 +20,4 @@ const val METRIX = "metrix"
 const val DEFAULT = "default"
 
 
-const val CHANNEL_ID = "ID"
+const val CHANNEL_ID = "CHANNELID"

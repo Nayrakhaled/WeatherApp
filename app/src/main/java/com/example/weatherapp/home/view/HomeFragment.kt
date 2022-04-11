@@ -101,80 +101,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        homeViewModel.currentWeather.observe(viewLifecycleOwner) { weather ->
-            binding.txtCity.text = String.format(Locale(language), "%s", gpsViewModel.getCity(LatLng(weather.lat, weather.lon), language))
-            binding.txtDate.text =
-                convertUTCToLocalDate(weather.current.dt, "EEE, dd MMM", language)
-            binding.txtDesc.text = weather.current.weather[0].description
-            Glide.with(requireContext())
-                .load(ICON_URL + weather.current.weather[0].icon + EXTENDED_IMG)
-                .override(150, 70)
-                .into(binding.imgCurrent)
-
-            homeViewModel.data.observe(viewLifecycleOwner) {
-//                Log.i("TAG", "onCreateView: ${it.getString("Temp", null)}")
-                val temp = when {
-                    it.getInt("Temp", -1) == 2 -> FAHRENHEIT
-                    it.getInt("Temp", -1) == 1 -> CELSIUS
-                    else -> KELVIN
-                }
-                binding.txtDegree.text =
-                    String.format(Locale(language), "%d", weather.current.temp.toInt())
-                binding.txtTypeDegree.text = getString(temp)
-
-                daysAdapter.setDaysList(weather.daily, getString(temp), language)
-                daysAdapter.notifyDataSetChanged()
-
-                hoursAdapter.setHoursList(weather.hourly, getString(temp), language)
-                hoursAdapter.notifyDataSetChanged()
-
-                val speed = when {
-                    it.getInt("Speed", -1) == 1 -> MILE_HOUR
-                    else -> METER_SEC
-                }
-                Log.i("TAG", "onCreateView:Speed $speed")
-                binding.txtWind.text = ""
-                binding.txtWind.text = "${
-                    String.format(
-                        Locale(language),
-                        "%d",
-                        weather.current.wind_speed.toInt()
-                    )
-                } $speed"
-
-                binding.txtPressure.text = "${
-                    String.format(
-                        Locale(language),
-                        "%d",
-                        weather.current.pressure.toInt()
-                    )
-                } ${getString(R.string.hpa)}"
-
-                binding.txtHumidity.text = "${
-                    String.format(
-                        Locale(language),
-                        "%d",
-                        weather.current.humidity.toInt()
-                    )
-                } %"
-                binding.txtCloud.text ="${
-                    String.format(
-                        Locale(language),
-                        "%d",
-                        weather.current.clouds.toInt()
-                    )
-                } %"
-                binding.txtViolet.text = String.format(Locale(language),"%f" ,weather.current.uvi)
-                binding.txtVisibility.text =
-                    "${
-                        String.format(
-                            Locale(language),
-                            "%d",
-                            weather.current.visibility.toInt()
-                        )
-                    } ${getString(R.string.m)}"
-            }
-        }
+        displayHomeScreen()
         return binding.root
     }
 
@@ -205,6 +132,85 @@ class HomeFragment : Fragment() {
         binding.rvHours.adapter = hoursAdapter
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun displayHomeScreen() {
+        homeViewModel.currentWeather.observe(viewLifecycleOwner) { weather ->
+            binding.txtCity.text = String.format(
+                Locale(language),
+                "%s",
+                gpsViewModel.getCity(LatLng(weather.lat, weather.lon), language)
+            )
+            binding.txtDate.text =
+                convertUTCToLocalDate(weather.current.dt, "EEE, dd MMM", language)
+            binding.txtDesc.text = weather.current.weather[0].description
+            Glide.with(requireContext())
+                .load(ICON_URL + weather.current.weather[0].icon + EXTENDED_IMG)
+                .override(150, 70)
+                .into(binding.imgCurrent)
+
+            homeViewModel.data.observe(viewLifecycleOwner) {
+                val temp = when {
+                    it.getInt("Temp", -1) == 2 -> FAHRENHEIT
+                    it.getInt("Temp", -1) == 1 -> CELSIUS
+                    else -> KELVIN
+                }
+                binding.txtDegree.text =
+                    String.format(Locale(language), "%d", weather.current.temp.toInt())
+                binding.txtTypeDegree.text = getString(temp)
+
+                daysAdapter.setDaysList(weather.daily, getString(temp), language)
+                daysAdapter.notifyDataSetChanged()
+
+                hoursAdapter.setHoursList(weather.hourly, getString(temp), language)
+                hoursAdapter.notifyDataSetChanged()
+
+                val speed = when {
+                    it.getInt("Speed", -1) == 1 -> MILE_HOUR
+                    else -> METER_SEC
+                }
+                Log.i("TAG", "onCreateView:Speed $speed")
+                binding.txtWind.text = "${
+                    String.format(
+                        Locale(language),
+                        "%d",
+                        weather.current.wind_speed.toInt()
+                    )
+                } $speed"
+
+                binding.txtPressure.text = "${
+                    String.format(
+                        Locale(language),
+                        "%d",
+                        weather.current.pressure.toInt()
+                    )
+                } ${getString(R.string.hpa)}"
+
+                binding.txtHumidity.text = "${
+                    String.format(
+                        Locale(language),
+                        "%d",
+                        weather.current.humidity.toInt()
+                    )
+                } %"
+                binding.txtCloud.text = "${
+                    String.format(
+                        Locale(language),
+                        "%d",
+                        weather.current.clouds.toInt()
+                    )
+                } %"
+                binding.txtViolet.text = String.format(Locale(language), "%f", weather.current.uvi)
+                binding.txtVisibility.text =
+                    "${
+                        String.format(
+                            Locale(language),
+                            "%d",
+                            weather.current.visibility.toInt()
+                        )
+                    } ${getString(R.string.m)}"
+            }
+        }
+    }
 
     override fun onStart() {
         checkPermissions()
@@ -255,7 +261,6 @@ class HomeFragment : Fragment() {
                     ) {
                         Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT)
                             .show()
-//                        gpsViewModel.getLastLocation()
                     }
                 } else {
                     Toast.makeText(
@@ -263,76 +268,13 @@ class HomeFragment : Fragment() {
                         "Location Permission Denied",
                         Toast.LENGTH_SHORT
                     ).show()
-//                    finish()
                 }
                 return
             }
         }
     }
 
-//    override fun onStart() {
-//
-//        if (!checkPermission()) {
-//            Log.i("TAG", "onResume: ")
-//            requestPermission()
-//
-//        }
-//
-//        super.onStart()
-//    }
-//
-//    private fun isLocationEnabled(): Boolean {
-//        val locationManager =
-//            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-//                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-//    }
-//
-//    private fun checkPermission(): Boolean {
-//        //check the location permissions and return true or false.
-//        if (ActivityCompat.checkSelfPermission(
-//                requireContext(),
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            ) == PackageManager.PERMISSION_GRANTED ||
-//            ActivityCompat.checkSelfPermission(
-//                requireContext(),
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            ) == PackageManager.PERMISSION_GRANTED
-//        ) {
-//            Log.i("TAG", "checkPermission: true")
-//            return true
-//        }
-//        Log.i("TAG", "checkPermission: false")
-//        return false
-//    }
-//
-//    private fun requestPermission() {
-//        ActivityCompat.requestPermissions(
-//            requireActivity(),
-//            arrayOf(
-//                Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            ),
-//            PERMISSION_ID_GPS
-//        )
-//    }
-//
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        if (requestCode == PERMISSION_ID_GPS) {
-//            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-//                Log.i("TAG", "onRequestPermissionsResult: noPremission")
-//            }
-//
-//        }
-//    }
-
     companion object {
-        var flag = 0
         fun convertUTCToLocalDate(time: Long, format: String, lang: String): String {
             val timeD = Date(time * 1000)
             val sdf = SimpleDateFormat(format, Locale(lang))

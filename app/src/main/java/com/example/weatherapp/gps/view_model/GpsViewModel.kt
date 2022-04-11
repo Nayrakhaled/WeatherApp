@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import java.util.*
+import kotlin.math.log
 
 
 class GpsViewModel(var context: Context) : ViewModel() {
@@ -39,7 +40,9 @@ class GpsViewModel(var context: Context) : ViewModel() {
 
     fun getCity(loc: LatLng, lang: String): String{
         val geocoder = Geocoder(context, Locale(lang))
+        Log.i("TAG", "getCity: ${loc.latitude}")
         val addresses: List<Address> = geocoder.getFromLocation(loc.latitude, loc.longitude, 1)
+        Log.i("TAG", "getCity: ${addresses[0].countryName}")
         return addresses[0].countryName
     }
 

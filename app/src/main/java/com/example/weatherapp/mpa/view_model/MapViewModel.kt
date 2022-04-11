@@ -30,6 +30,7 @@ class MapViewModel(private val repo: Repository) : ViewModel() {
             val current = repo.getCurrentWeather(lat, lon,  lang, units)
             withContext(Dispatchers.IO) {
                 insertFavWeather(current)
+                Log.i("TAG", "getCurrentWeather: ${current.timezone}")
             }
         }
     }

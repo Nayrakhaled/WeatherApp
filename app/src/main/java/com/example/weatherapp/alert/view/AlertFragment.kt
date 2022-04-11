@@ -65,7 +65,7 @@ class AlertFragment : Fragment(), onClickListener {
         alertAdapter = AlertAdapter(alertList, requireContext(), this)
         binding.rvAlert.adapter = alertAdapter
 
-//        alertViewModel.getAlerts()
+        alertViewModel.getAlerts()
         alertViewModel.alertsAPI.observe(viewLifecycleOwner){
             alertList.clear()
            if(it == null){

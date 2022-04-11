@@ -9,17 +9,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
+import com.example.weatherapp.gps.view_model.GpsViewModel
 import com.example.weatherapp.home.view.HomeFragment
 import com.example.weatherapp.model.Daily
 import com.example.weatherapp.model.WeatherAPI
+import com.google.android.gms.maps.model.LatLng
 
 class FavAdapter(
     private var listFav: List<WeatherAPI>,
     var listener: OnClickListener,
-    var context: Context
+    var context: Context,
+    var gpsViewModel: GpsViewModel
 ) :
     RecyclerView.Adapter<FavAdapter.ViewHolder>() {
-    private lateinit var city: String
+    private lateinit var lang: String
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavAdapter.ViewHolder {
         val view =
@@ -27,14 +30,16 @@ class FavAdapter(
         return ViewHolder(view)
     }
 
-    fun setFavList(listFav: List<WeatherAPI>, city: String) {
+    fun setFavList(listFav: List<WeatherAPI>, lang: String) {
         this.listFav = listFav
-        this.city = city
+        this.lang = lang
     }
 
     override fun onBindViewHolder(holder: FavAdapter.ViewHolder, position: Int) {
         val weather: WeatherAPI = listFav!![position]
-        holder.txtName.text = city
+        Log.i("TAG", "onBindViewHolder: ${weather.timezone}")
+        holder.txtName.text = gpsViewModel.getCity(LatLng(weather.lat, weather.lon), lang)
+
         holder.itemView.setOnClickListener {
             listener.onClick(weather)
         }
