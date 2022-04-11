@@ -12,12 +12,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
+        android:background="@drawable/gradient_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/layout">
@@ -26,13 +27,13 @@
                 android:id="@+id/txt_hourly_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
+                android:textColor="@color/white"
                 android:text="@string/app_name"
                 android:textSize="13sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/constraint" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -66,6 +67,8 @@
                 android:id="@+id/txt_hourly_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,8 +37,8 @@ class GpsViewModel(var context: Context) : ViewModel() {
         }
     }
 
-    fun getCity(loc: LatLng): String{
-        val geocoder = Geocoder(context, Locale.getDefault())
+    fun getCity(loc: LatLng, lang: String): String{
+        val geocoder = Geocoder(context, Locale(lang))
         val addresses: List<Address> = geocoder.getFromLocation(loc.latitude, loc.longitude, 1)
         return addresses[0].countryName
     }

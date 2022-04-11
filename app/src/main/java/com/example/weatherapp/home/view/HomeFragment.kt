@@ -102,14 +102,14 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.currentWeather.observe(viewLifecycleOwner) { weather ->
-            binding.txtCity.text = String.format(Locale(language), "%s", gpsViewModel.getCity(LatLng(weather.lat, weather.lon)))
+            binding.txtCity.text = String.format(Locale(language), "%s", gpsViewModel.getCity(LatLng(weather.lat, weather.lon), language))
             binding.txtDate.text =
                 convertUTCToLocalDate(weather.current.dt, "EEE, dd MMM", language)
             binding.txtDesc.text = weather.current.weather[0].description
-//            Glide.with(requireContext())
-//                .load(ICON_URL + weather.current.weather[0].icon + EXTENDED_IMG)
-//                .override(150, 70)
-//                .into(binding.imgCurrent)
+            Glide.with(requireContext())
+                .load(ICON_URL + weather.current.weather[0].icon + EXTENDED_IMG)
+                .override(150, 70)
+                .into(binding.imgCurrent)
 
             homeViewModel.data.observe(viewLifecycleOwner) {
 //                Log.i("TAG", "onCreateView: ${it.getString("Temp", null)}")

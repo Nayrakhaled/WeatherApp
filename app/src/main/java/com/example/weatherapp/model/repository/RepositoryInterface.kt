@@ -1,6 +1,7 @@
 package com.example.weatherapp.model.repository
 
 import android.content.SharedPreferences
+import com.example.weatherapp.model.AlertModel
 import com.example.weatherapp.model.Alerts
 import com.example.weatherapp.model.Weather
 import com.example.weatherapp.model.WeatherAPI
@@ -28,5 +29,10 @@ interface RepositoryInterface {
     suspend fun getAllFavWeather(): List<WeatherAPI>
     suspend fun getFavWeather(city: String): WeatherAPI
     suspend fun deleteFav(weather: WeatherAPI)
+
+    //Room Alert
+    fun insertAlerts(alert: AlertModel)
+    suspend fun getAlerts(): AlertModel
+    suspend fun deleteAlert()
 
 }

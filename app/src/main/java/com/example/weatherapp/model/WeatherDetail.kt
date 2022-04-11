@@ -1,5 +1,9 @@
 package com.example.weatherapp.model
 
+import androidx.room.Dao
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 data class Current(
     var dt: Long,
     var temp: Float,
@@ -47,7 +51,9 @@ data class Alerts(
     var description: String,
 )
 
+@Entity(tableName = "weather")
 data class AlertModel(
+    @PrimaryKey
     var dateFrom: String,
     var timeFrom: String,
     var dateTo: String,

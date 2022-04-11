@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.roomdemomvvm.db.LocalSource
 import com.example.weatherapp.local.sharedPrefs.SharedPrefsInterface
+import com.example.weatherapp.model.AlertModel
 import com.example.weatherapp.model.Alerts
 import com.example.weatherapp.model.Weather
 import com.example.weatherapp.model.WeatherAPI
@@ -65,5 +66,17 @@ class Repository(
 
     override suspend fun deleteFav(weather: WeatherAPI) {
         localSource.deleteFav(weather)
+    }
+
+    override fun insertAlerts(alert: AlertModel) {
+        localSource.insertAlerts(alert)
+    }
+
+    override suspend fun getAlerts(): AlertModel {
+        return localSource.getAlerts()
+    }
+
+    override suspend fun deleteAlert() {
+        localSource.deleteAlerts()
     }
 }

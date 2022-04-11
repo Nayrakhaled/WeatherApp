@@ -15,12 +15,9 @@ const val FAHRENHEIT: Int = R.string.f
 const val METER_SEC: Int = R.string.m_s
 const val MILE_HOUR: Int = R.string.m_h
 
-const val PERMISSION_ID_GPS: Int = 1000
-const val PERMISSION_CODE: Int = 101
-
 const val IMPERIAL = "imperial"
 const val METRIX = "metrix"
 const val DEFAULT = "default"
 
 
-const val CHANNEL_ID = "CHANNEL_ID"
+const val CHANNEL_ID = "ID"

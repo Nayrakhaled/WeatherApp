@@ -9,8 +9,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_setting">Setting</string>
-    <string name="menu_favourite">Favorite</string>
+    <string name="menu_setting">Settings</string>
+    <string name="menu_favourite">Favourites</string>
     <string name="weather">Weather</string>
     <string name="menu_alert">Alerts</string>
     <string name="location">Location</string>

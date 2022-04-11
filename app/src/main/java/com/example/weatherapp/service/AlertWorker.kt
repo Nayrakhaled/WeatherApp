@@ -4,6 +4,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
@@ -111,20 +112,20 @@ class AlertWorker(var context: Context, workerParams: WorkerParameters) :
             )
             notificationManager.createNotificationChannel(channel)
         }
-//        val sound =
-//            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/raw/quite_impressed.mp3")
-        val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val sound =
+            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.packageName + "/raw/storm_thunder.mp3")
+//        val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notification: Notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_cloud_24)
             .setContentTitle(title)
             .setContentText(desc)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(notifyPendingIntent)
-            .setSound(alarmSound)
+            .setSound(sound)
             .setAutoCancel(true).build()
         val managerCompat = NotificationManagerCompat.from(
             applicationContext
         )
-        managerCompat.notify(2, notification)
+        managerCompat.notify(3, notification)
     }
 }

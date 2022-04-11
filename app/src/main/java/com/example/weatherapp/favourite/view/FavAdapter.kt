@@ -13,26 +13,32 @@ import com.example.weatherapp.home.view.HomeFragment
 import com.example.weatherapp.model.Daily
 import com.example.weatherapp.model.WeatherAPI
 
-class FavAdapter(private var listFav: List<WeatherAPI>, var listener: OnClickListener, var context: Context) :
+class FavAdapter(
+    private var listFav: List<WeatherAPI>,
+    var listener: OnClickListener,
+    var context: Context
+) :
     RecyclerView.Adapter<FavAdapter.ViewHolder>() {
+    private lateinit var city: String
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavAdapter.ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.row_fav, parent, false)
         return ViewHolder(view)
     }
-    fun setFavList(listFav: List<WeatherAPI>) {
-        this.listFav = listFav
 
+    fun setFavList(listFav: List<WeatherAPI>, city: String) {
+        this.listFav = listFav
+        this.city = city
     }
 
     override fun onBindViewHolder(holder: FavAdapter.ViewHolder, position: Int) {
         val weather: WeatherAPI = listFav!![position]
-        holder.txtName.text = weather.timezone
-        holder.itemView.setOnClickListener{
+        holder.txtName.text = city
+        holder.itemView.setOnClickListener {
             listener.onClick(weather)
         }
-        holder.imgDelete.setOnClickListener{
+        holder.imgDelete.setOnClickListener {
             Log.i("TAG", "onBindViewHolder: ${weather.timezone}")
             listener.onClickDelete(weather)
         }

@@ -1,6 +1,5 @@
 package com.example.weatherapp.alert.view
 
-import android.R.attr.delay
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -34,7 +33,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 
-class AlertFragment : Fragment() {
+class AlertFragment : Fragment(), onClickListener {
 
     private var _binding: FragmentAlertsBinding? = null
     private val binding get() = _binding!!
@@ -44,7 +43,8 @@ class AlertFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var homeViewModelFactory: HomeViewModelFactory
     private lateinit var alertAdapter: AlertAdapter
-    private var alertList: List<AlertModel> = listOf()
+    private var alertList = mutableListOf<AlertModel>()
+    val alert = AlertModel("", "", "", "")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +53,39 @@ class AlertFragment : Fragment() {
     ): View {
         _binding = FragmentAlertsBinding.inflate(inflater, container, false)
 
+        getInit()
+
+        binding.imgNoneNotif.isVisible = when {
+            alertList.isEmpty() -> true
+            else -> false
+        }
+        binding.rvAlert.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        alertAdapter = AlertAdapter(alertList, requireContext(), this)
+        binding.rvAlert.adapter = alertAdapter
+
+//        alertViewModel.getAlerts()
+        alertViewModel.alertsAPI.observe(viewLifecycleOwner){
+            alertList.clear()
+           if(it == null){
+               alertAdapter.setAlertList(alertList)
+               alertAdapter.notifyDataSetChanged()
+           }else{
+               binding.imgNoneNotif.isVisible = false
+               alertList.add(it)
+               alertAdapter.setAlertList(alertList)
+               alertAdapter.notifyDataSetChanged()
+           }
+        }
+
+        binding.fabAlert.setOnClickListener {
+            showAlertDialog()
+        }
+        return binding.root
+    }
+
+    private fun getInit() {
         alertViewModelFactory = AlertViewModelFactory(
             Repository.getInstance(
                 WeatherClient.getInstance(),
@@ -74,20 +107,6 @@ class AlertFragment : Fragment() {
         homeViewModel =
             ViewModelProvider(this, homeViewModelFactory)[HomeViewModel::class.java]
 
-        binding.imgNoneNotif.isVisible = when {
-            alertList.isEmpty() -> true
-            else -> false
-        }
-        binding.rvAlert.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        alertAdapter = AlertAdapter(alertList, requireContext())
-        binding.rvAlert.adapter = alertAdapter
-
-
-        binding.fabAlert.setOnClickListener {
-            showAlertDialog()
-        }
-        return binding.root
     }
 
     private fun showAlertDialog() {
@@ -110,13 +129,15 @@ class AlertFragment : Fragment() {
 
         val currentTime = Calendar.getInstance()
         var time = ""
-
         txtTimeTo.setOnClickListener {
             val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
                 currentTime.set(Calendar.HOUR_OF_DAY, hour)
                 currentTime.set(Calendar.MINUTE, minute)
                 txtTimeTo.text = SimpleDateFormat("HH:mm").format(currentTime.time)
                 time = SimpleDateFormat("HH:mm").format(currentTime.time)
+                alert.timeTo = time
+                alert.timeFrom = SimpleDateFormat("HH:mm").format(Date())
+                Log.i("TAG", "showAlertDialog: ${alert.timeFrom}")
             }
             TimePickerDialog(
                 requireContext(),
@@ -136,6 +157,8 @@ class AlertFragment : Fragment() {
                     SimpleDateFormat("dd-MM-yyyy").format(currentTime.time),
                     time
                 )
+                alert.dateTo = SimpleDateFormat("dd-MM-yyyy").format(currentTime.time)
+                alert.dateFrom = SimpleDateFormat("dd-MM-yyyy").format(Date())
             }
             DatePickerDialog(
                 requireContext(), dateListener,
@@ -144,17 +167,12 @@ class AlertFragment : Fragment() {
                 currentTime.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
-        alertList = listOf(
-            AlertModel(
-                txtDateFrom.text.toString(),
-                txtTimeFrom.text.toString(),
-                txtDateTo.text.toString(),
-                txtTimeTo.text.toString()
-            )
-        )
-
 
         okBtn.setOnClickListener {
+            alertViewModel.insertAlert(alert)
+            alertList.add(alert)
+            Log.i("TAG", "showAlertDialog:7777777777 ${alert.timeFrom}")
+
             alertAdapter.setAlertList(alertList)
             alertAdapter.notifyDataSetChanged()
             binding.imgNoneNotif.isVisible = false
@@ -234,5 +252,22 @@ class AlertFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(alert: AlertModel) {
+        alertViewModel.deleteAlerts()
+        alertViewModel.alertsAPI.observe(viewLifecycleOwner){
+            alertList.clear()
+            if(it == null){
+                alertAdapter.setAlertList(alertList)
+                alertAdapter.notifyDataSetChanged()
+                binding.imgNoneNotif.isVisible = true
+            }else{
+                binding.imgNoneNotif.isVisible = false
+                alertList.add(it)
+                alertAdapter.setAlertList(alertList)
+                alertAdapter.notifyDataSetChanged()
+            }
+        }
     }
 }

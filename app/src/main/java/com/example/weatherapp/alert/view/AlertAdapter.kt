@@ -11,7 +11,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.model.AlertModel
 import com.example.weatherapp.model.WeatherAPI
 
-class AlertAdapter(private var listAlert: List<AlertModel>, var context: Context) :
+class AlertAdapter(private var listAlert: List<AlertModel>, var context: Context, var listener: onClickListener) :
     RecyclerView.Adapter<AlertAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlertAdapter.ViewHolder {
@@ -33,7 +33,7 @@ class AlertAdapter(private var listAlert: List<AlertModel>, var context: Context
         holder.txtTimeTo.text = alert.timeTo
 
         holder.btnDelete.setOnClickListener{
-
+            listener.onClick(alert)
         }
 
     }

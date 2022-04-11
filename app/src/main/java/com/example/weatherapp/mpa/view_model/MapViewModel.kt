@@ -39,6 +39,11 @@ class MapViewModel(private val repo: Repository) : ViewModel() {
         repo.saveSetting(keyName, valueName)
     }
 
+    fun saveSettingInt(keyName: String, valueName: Int){
+        Log.i("TAG", "saveSetting: $valueName")
+        repo.saveSettingInt(keyName, valueName)
+    }
+
     fun getDataFromShared(){
         _data.postValue(repo.getSetting())
     }

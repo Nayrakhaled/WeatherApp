@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/gradiant_bk"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:gravity="bottom"
@@ -16,14 +16,12 @@
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="4dp"
         android:contentDescription="@string/nav_header_desc"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:layout_constraintEnd_toStartOf="@id/text"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20sp"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/teal_700"
-        android:src="@drawable/ic_baseline_cloud_24"
+        android:src="@drawable/ic_baseline_cloud_24_white"
         />
 
     <TextView
@@ -35,7 +33,7 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/weather"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/imageView"

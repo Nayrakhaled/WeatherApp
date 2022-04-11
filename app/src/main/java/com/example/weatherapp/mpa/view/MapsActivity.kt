@@ -60,6 +60,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             when {
                 intent.extras?.get("init")?.equals("home") == true -> {
                     Log.i("TAG", "onCreate: MAP Activity")
+                    mapViewModel.saveSettingInt("Location", 1)
                     mapViewModel.saveSetting("lat", currentLocation.latitude.toString())
                     mapViewModel.saveSetting("log", currentLocation.longitude.toString())
                     startActivity(Intent(this, HomeActivity::class.java))
